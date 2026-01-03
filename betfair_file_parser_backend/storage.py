@@ -253,8 +253,15 @@ def create_file_store() -> BaseFileStore:
     project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
 
     if use_cloud and bucket_name:
-        logger.info("Using CloudFileStore for persistent storage")
-        return CloudFileStore(bucket_name=bucket_name, project_id=project_id)
+        try:
+            logger.info("Attempting to initialize CloudFileStore...")
+            store = CloudFileStore(bucket_name=bucket_name, project_id=project_id)
+            logger.info("CloudFileStore initialized successfully")
+            return store
+        except Exception as e:
+            logger.error(f"Failed to initialize CloudFileStore: {e}")
+            logger.warning("Falling back to in-memory FileStore")
+            return FileStore()
     else:
         logger.info("Using in-memory FileStore (data will not persist)")
         return FileStore()
