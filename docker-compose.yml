@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./betfair_file_parser_backend
+      dockerfile: Dockerfile
+    container_name: betfair-parser-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=INFO
+      - ENVIRONMENT=development
+    volumes:
+      - ./betfair_file_parser_backend:/app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    image: node:18-alpine
+    container_name: betfair-parser-frontend
+    working_dir: /app
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./betfair_file_parser_frontend:/app
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8080
+    command: >
+      sh -c "npm install && npm run dev"
+    depends_on:
+      - backend
+
+networks:
+  default:
+    name: betfair-parser-network

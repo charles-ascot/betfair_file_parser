@@ -1,0 +1,126 @@
+# Google Cloud Run Deployment Configuration
+# File: cloud-run-deploy.yaml
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: betfair-file-parser-api
+  namespace: default
+  labels:
+    app: betfair-file-parser
+    version: v1.0.0
+spec:
+  template:
+    metadata:
+      labels:
+        app: betfair-file-parser
+        version: v1.0.0
+    spec:
+      serviceAccountName: default
+      timeoutSeconds: 3600
+      containers:
+      - image: gcr.io/PROJECT_ID/betfair-file-parser:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "2"
+            memory: "2Gi"
+          requests:
+            cpu: "1"
+            memory: "1Gi"
+        env:
+        - name: PORT
+          value: "8080"
+        - name: ENVIRONMENT
+          value: "production"
+        - name: LOG_LEVEL
+          value: "INFO"
+        - name: PYTHONUNBUFFERED
+          value: "1"
+        - name: USE_CLOUD_STORAGE
+          value: "true"
+        - name: GCS_BUCKET_NAME
+          value: "betfair-parser-files-prod"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 40
+          periodSeconds: 30
+          timeoutSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+  traffic:
+  - percent: 100
+    latestRevision: true
+
+---
+
+# Service Account with necessary permissions
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMServiceAccount
+metadata:
+  name: betfair-file-parser-sa
+spec:
+  displayName: "Betfair File Parser Service Account"
+
+---
+
+# IAM Role Binding for Cloud Storage access
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicy
+metadata:
+  name: betfair-file-parser-storage-policy
+spec:
+  resourceRef:
+    apiVersion: storage.cnrm.cloud.google.com/v1beta1
+    kind: StorageBucket
+    name: betfair-parser-files
+  bindings:
+  - role: roles/storage.objectAdmin
+    members:
+    - serviceAccount:betfair-file-parser-sa@PROJECT_ID.iam.gserviceaccount.com
+
+---
+
+# IAM Role Binding for Firestore access
+apiVersion: iam.cnrm.cloud.google.com/v1beta1
+kind: IAMPolicyMember
+metadata:
+  name: betfair-file-parser-firestore-policy
+spec:
+  member: serviceAccount:betfair-file-parser-sa@PROJECT_ID.iam.gserviceaccount.com
+  role: roles/datastore.user
+  resourceRef:
+    apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+    kind: Project
+    external: PROJECT_ID
+
+---
+
+# Cloud Storage Bucket for file storage
+apiVersion: storage.cnrm.cloud.google.com/v1beta1
+kind: StorageBucket
+metadata:
+  name: betfair-parser-files-prod
+spec:
+  location: EU  # Adjust based on your region (e.g., US, EU, ASIA)
+  storageClass: STANDARD
+  lifecycleRule:
+  - action:
+      type: Delete
+    condition:
+      age: 30  # Delete files older than 30 days
+  versioning:
+    enabled: false
+  uniformBucketLevelAccess:
+    enabled: true
+  labels:
+    app: betfair-file-parser
+    environment: production
