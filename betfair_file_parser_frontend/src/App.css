@@ -1,6 +1,5 @@
 /* ============================================================================
-   Betfair File Parser - Dark Glassmorphic Theme (Nunito Font)
-   Matching Ascot Wealth Management Betfair API Explorer 2.0
+   Betfair File Parser - Compact Dark Theme (Nunito Font)
    ============================================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
@@ -17,11 +16,12 @@
   --card-bg: rgba(30, 35, 60, 0.4);
   --card-border: rgba(0, 212, 255, 0.1);
   
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 0.75rem;
-  --spacing-lg: 1rem;
-  --spacing-xl: 1.5rem;
+  --spacing-xs: 0.2rem;
+  --spacing-sm: 0.35rem;
+  --spacing-md: 0.5rem;
+  --spacing-lg: 0.75rem;
+  --spacing-xl: 1rem;
+  --spacing-2xl: 1.5rem;
 }
 
 * {
@@ -31,22 +31,20 @@
 }
 
 html {
-  font-size: 15px;
+  font-size: 13px;
 }
 
 body {
   font-family: 'Nunito', sans-serif;
   background: linear-gradient(135deg, #0a0e27 0%, #1a1a3a 50%, #0f0f2e 100%);
   color: var(--text-primary);
-  line-height: 1.5;
-  min-height: 100vh;
+  line-height: 1.4;
 }
 
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0a0e27 0%, #1a1a3a 50%, #0f0f2e 100%);
 }
 
 .app-container {
@@ -62,7 +60,7 @@ body {
   background: rgba(10, 14, 39, 0.8);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(0, 212, 255, 0.15);
-  padding: var(--spacing-lg) var(--spacing-xl);
+  padding: var(--spacing-md) var(--spacing-lg);
 }
 
 .header-content {
@@ -74,12 +72,11 @@ body {
 }
 
 .logo {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  letter-spacing: -0.5px;
 }
 
 .logo-text {
@@ -90,39 +87,38 @@ body {
 }
 
 .logo-icon {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   background: linear-gradient(135deg, var(--cyan), var(--purple));
-  border-radius: 6px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   color: #0a0e27;
-  font-size: 0.85rem;
+  font-size: 0.7rem;
 }
 
 .header-subtitle {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--cyan);
-  opacity: 0.9;
-  margin-top: 2px;
+  opacity: 0.8;
 }
 
 .status-indicator {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  font-size: 0.8rem;
+  gap: var(--spacing-xs);
+  font-size: 0.7rem;
   color: var(--text-secondary);
 }
 
 .status-dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: var(--cyan);
-  box-shadow: 0 0 10px var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
   animation: pulse 2s infinite;
 }
 
@@ -136,14 +132,14 @@ body {
    ============================================================================ */
 
 .navigation {
-  width: 180px;
+  width: 160px;
   background: rgba(15, 20, 45, 0.5);
   backdrop-filter: blur(10px);
   border-right: 1px solid rgba(0, 212, 255, 0.1);
   padding: var(--spacing-md);
   overflow-y: auto;
-  height: calc(100vh - 90px);
-  font-size: 0.85rem;
+  height: calc(100vh - 70px);
+  font-size: 0.75rem;
 }
 
 .nav-section {
@@ -151,7 +147,7 @@ body {
 }
 
 .nav-section-title {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -166,13 +162,13 @@ body {
   align-items: center;
   gap: var(--spacing-md);
   padding: var(--spacing-sm) var(--spacing-md);
-  margin-bottom: 0.25rem;
-  border-radius: 6px;
+  margin-bottom: 0.2rem;
+  border-radius: 5px;
   cursor: pointer;
   transition: all 0.2s ease;
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   border-left: 2px solid transparent;
   padding-left: calc(var(--spacing-md) - 2px);
 }
@@ -193,8 +189,8 @@ body {
 }
 
 .nav-icon {
-  font-size: 1rem;
-  min-width: 18px;
+  font-size: 0.9rem;
+  min-width: 16px;
 }
 
 /* ============================================================================
@@ -203,9 +199,9 @@ body {
 
 .main-content {
   flex: 1;
-  padding: var(--spacing-xl);
+  padding: var(--spacing-lg);
   overflow-y: auto;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   width: 100%;
 }
@@ -215,19 +211,131 @@ body {
    ============================================================================ */
 
 .card {
-  background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
+  background: rgba(15, 22, 50, 0.8);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 10px;
   padding: var(--spacing-lg);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   transition: all 0.25s ease;
 }
 
 .card:hover {
-  background: rgba(30, 40, 75, 0.5);
-  border-color: rgba(0, 212, 255, 0.2);
-  box-shadow: 0 12px 48px rgba(0, 212, 255, 0.1);
+  background: rgba(20, 28, 65, 0.9);
+  border-color: rgba(0, 212, 255, 0.3);
+}
+
+/* Stat Cards */
+.stat-card {
+  background: rgba(15, 22, 50, 0.8);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 10px;
+  padding: var(--spacing-lg);
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  background: rgba(20, 28, 65, 0.9);
+  border-color: rgba(0, 212, 255, 0.25);
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.stat-icon {
+  font-size: 1.6rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Quick Start Cards */
+.quick-start-card {
+  background: rgba(15, 22, 50, 0.8);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 10px;
+  padding: var(--spacing-lg);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quick-start-card:hover {
+  background: rgba(20, 28, 65, 0.9);
+  border-color: rgba(0, 212, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.quick-start-number {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--cyan);
+  margin-bottom: var(--spacing-md);
+}
+
+.quick-start-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.quick-start-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* ============================================================================
+   Dashboard Sections
+   ============================================================================ */
+
+.dashboard-section {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.section-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.quick-start-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--spacing-lg);
 }
 
 /* ============================================================================
@@ -240,7 +348,7 @@ body {
 
 .form-label {
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -255,16 +363,16 @@ select {
   padding: var(--spacing-md) var(--spacing-lg);
   background: rgba(20, 30, 55, 0.6);
   border: 1px solid rgba(0, 212, 255, 0.2);
-  border-radius: 8px;
+  border-radius: 6px;
   color: var(--text-primary);
   font-family: 'Nunito', sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   transition: all 0.2s ease;
 }
 
 input::placeholder {
   color: var(--text-secondary);
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 input:focus,
@@ -273,7 +381,7 @@ select:focus {
   outline: none;
   background: rgba(20, 30, 55, 0.8);
   border-color: rgba(0, 212, 255, 0.4);
-  box-shadow: 0 0 12px rgba(0, 212, 255, 0.15);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.1);
 }
 
 /* ============================================================================
@@ -283,8 +391,8 @@ select:focus {
 .btn {
   padding: var(--spacing-sm) var(--spacing-lg);
   border: none;
-  border-radius: 8px;
-  font-size: 0.85rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -299,12 +407,12 @@ select:focus {
 .btn-primary {
   background: linear-gradient(90deg, var(--cyan), var(--purple));
   color: white;
-  box-shadow: 0 4px 16px rgba(0, 212, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.25);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 212, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 212, 255, 0.35);
 }
 
 .btn-secondary {
@@ -315,7 +423,6 @@ select:focus {
 
 .btn-secondary:hover {
   background: rgba(0, 212, 255, 0.25);
-  border-color: rgba(0, 212, 255, 0.5);
 }
 
 .btn-danger {
@@ -326,38 +433,6 @@ select:focus {
 
 .btn-danger:hover {
   background: rgba(231, 76, 60, 0.3);
-  border-color: rgba(231, 76, 60, 0.6);
-}
-
-.btn-disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-/* ============================================================================
-   Error Banner
-   ============================================================================ */
-
-.error-banner {
-  background: rgba(231, 76, 60, 0.15);
-  border: 1px solid rgba(231, 76, 60, 0.3);
-  border-radius: 8px;
-  padding: var(--spacing-md) var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
-  color: #ff8a80;
-  font-size: 0.9rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.error-banner button {
-  background: none;
-  border: none;
-  color: #ff8a80;
-  cursor: pointer;
-  font-size: 1.2rem;
-  padding: 0;
 }
 
 /* ============================================================================
@@ -370,48 +445,18 @@ select:focus {
   color: var(--text-secondary);
   padding: var(--spacing-md) var(--spacing-lg);
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .footer-content {
   display: flex;
   justify-content: center;
   gap: var(--spacing-lg);
-  flex-wrap: wrap;
 }
 
 .footer-section a {
   color: var(--cyan);
   text-decoration: none;
-  transition: opacity 0.2s;
-}
-
-.footer-section a:hover {
-  opacity: 0.8;
-}
-
-/* ============================================================================
-   Loading
-   ============================================================================ */
-
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 200px;
-}
-
-.spinner {
-  width: 30px;
-  height: 30px;
-  border: 3px solid rgba(0, 212, 255, 0.2);
-  border-top-color: var(--cyan);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
 }
 
 /* ============================================================================
@@ -421,11 +466,11 @@ select:focus {
 table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 0.8rem;
 }
 
 thead {
   background: rgba(0, 212, 255, 0.08);
-  border-bottom: 1px solid rgba(0, 212, 255, 0.15);
 }
 
 th {
@@ -433,7 +478,7 @@ th {
   text-align: left;
   font-weight: 600;
   color: var(--cyan);
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -441,11 +486,6 @@ th {
 td {
   padding: var(--spacing-md) var(--spacing-lg);
   border-bottom: 1px solid rgba(0, 212, 255, 0.05);
-  color: var(--text-primary);
-}
-
-tbody tr:hover {
-  background: rgba(0, 212, 255, 0.05);
 }
 
 /* ============================================================================
@@ -453,6 +493,8 @@ tbody tr:hover {
    ============================================================================ */
 
 @media (max-width: 768px) {
+  html { font-size: 12px; }
+  
   .app-container {
     flex-direction: column;
   }
@@ -464,7 +506,6 @@ tbody tr:hover {
     border-bottom: 1px solid rgba(0, 212, 255, 0.1);
     display: flex;
     overflow-x: auto;
-    padding: var(--spacing-md);
   }
 
   .nav-section {
@@ -477,21 +518,8 @@ tbody tr:hover {
     display: none;
   }
 
-  .main-content {
-    padding: var(--spacing-lg);
-  }
-}
-
-@media (max-width: 480px) {
-  :root {
-    font-size: 14px;
-  }
-
-  .header {
-    padding: var(--spacing-md);
-  }
-
-  .main-content {
-    padding: var(--spacing-md);
+  .stats-grid,
+  .quick-start-grid {
+    grid-template-columns: 1fr;
   }
 }
