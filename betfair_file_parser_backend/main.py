@@ -602,7 +602,10 @@ async def general_exception_handler(request, exc):
 async def startup_event():
     """Application startup"""
     logger.info("Betfair File Parser API starting up")
-    logger.info(f"Temporary storage: {file_store.temp_dir}")
+    if hasattr(file_store, 'temp_dir'):
+        logger.info(f"Temporary storage: {file_store.temp_dir}")
+    else:
+        logger.info("Using Cloud Storage backend")
 
 @app.on_event("shutdown")
 async def shutdown_event():
