@@ -520,12 +520,14 @@ async def list_files():
 @app.delete("/api/files/{file_id}")
 async def delete_file(file_id: str):
     """Delete a file and its parsed data"""
-    
-    if not file_store.get(file_id):
-        raise HTTPException(status_code=404, detail="File not found")
-    
-    file_store.delete(file_id)
-    return {"message": "File deleted", "file_id": file_id}
+
+    # Delete directly without checking - handles broken files with mismatched IDs
+    try:
+        file_store.delete(file_id)
+        return {"message": "File deleted", "file_id": file_id}
+    except Exception as e:
+        logger.error(f"Delete failed for {file_id}: {e}")
+        raise HTTPException(status_code=500, detail="Failed to delete file")
 
 # ============================================================================
 # Export Endpoints
