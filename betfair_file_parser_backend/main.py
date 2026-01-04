@@ -264,7 +264,7 @@ class BetfairDataParser:
                 for item in raw_data]
     
     @classmethod
-    def parse_file(cls, file_content: bytes, file_name: str) -> FileParseResponse:
+    def parse_file(cls, file_content: bytes, file_name: str, file_id: str) -> FileParseResponse:
         """Parse complete Betfair file and return structured data"""
         
         import time
@@ -313,7 +313,7 @@ class BetfairDataParser:
         processing_time_ms = int((time.time() - start_time) * 1000)
         
         file_metadata = FileMetadata(
-            file_id=str(uuid.uuid4()),
+            file_id=file_id,
             file_name=file_name,
             size_bytes=compressed_size,
             upload_time=datetime.utcnow().isoformat() + 'Z',
@@ -459,7 +459,7 @@ async def upload_file(file: UploadFile = File(...)):
         
         # Parse file
         try:
-            parse_result = BetfairDataParser.parse_file(content, file.filename)
+            parse_result = BetfairDataParser.parse_file(content, file.filename, file_id)
             
             # Store parsed data
             file_store.save(file_id, parse_result.dict())
