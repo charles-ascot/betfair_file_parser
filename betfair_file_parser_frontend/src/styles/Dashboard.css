@@ -86,6 +86,17 @@
   color: var(--primary-navy);
 }
 
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+  margin-bottom: 0;
+}
+
 /* Quick Start Cards */
 
 .quick-start-cards {

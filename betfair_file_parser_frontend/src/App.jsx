@@ -80,9 +80,13 @@ function App() {
         const response = await fetch(`${apiBaseUrl}/api/files/${fileId}`, {
           method: 'DELETE',
         });
-        
+
         if (response.ok) {
           await loadFiles();
+          if (selectedFile === fileId) {
+            setSelectedFile(null);
+            setCurrentPage('dashboard');
+          }
           setError(null);
         } else {
           setError('Failed to delete file');
@@ -90,6 +94,25 @@ function App() {
       } catch (err) {
         console.error('Delete error:', err);
         setError('Failed to delete file');
+      }
+    }
+  };
+
+  const handleDeleteAll = async () => {
+    if (window.confirm(`Are you sure you want to delete ALL ${files.length} files? This cannot be undone.`)) {
+      try {
+        for (const file of files) {
+          await fetch(`${apiBaseUrl}/api/files/${file.file_id}`, {
+            method: 'DELETE',
+          });
+        }
+        await loadFiles();
+        setSelectedFile(null);
+        setCurrentPage('dashboard');
+        setError(null);
+      } catch (err) {
+        console.error('Delete all error:', err);
+        setError('Failed to delete all files');
       }
     }
   };
@@ -131,7 +154,7 @@ function App() {
   const renderPage = () => {
     switch (currentPage) {
       case 'dashboard':
-        return <Dashboard files={files} onViewFile={handleViewFile} />;
+        return <Dashboard files={files} onViewFile={handleViewFile} onDeleteFile={handleDeleteFile} onDeleteAll={handleDeleteAll} />;
       case 'upload':
         return <FileUpload onFileUpload={handleFileUpload} loading={loading} />;
       case 'viewer':
@@ -148,7 +171,7 @@ function App() {
       case 'export':
         return <ExportCenter files={files} onExport={handleExport} />;
       default:
-        return <Dashboard files={files} onViewFile={handleViewFile} />;
+        return <Dashboard files={files} onViewFile={handleViewFile} onDeleteFile={handleDeleteFile} onDeleteAll={handleDeleteAll} />;
     }
   };
 

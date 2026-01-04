@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/Dashboard.css';
 
-function Dashboard({ files, onViewFile }) {
+function Dashboard({ files, onViewFile, onDeleteFile, onDeleteAll }) {
   const totalFiles = files.length;
   const totalMarkets = files.reduce((sum, f) => sum + (f.markets || 0), 0);
 
@@ -71,7 +71,12 @@ function Dashboard({ files, onViewFile }) {
 
       {recentFiles.length > 0 && (
         <div className="dashboard-section">
-          <h2>Recent Files</h2>
+          <div className="section-header">
+            <h2>Recent Files</h2>
+            <button className="btn btn-danger" onClick={onDeleteAll}>
+              Delete All Files
+            </button>
+          </div>
           <div className="file-list">
             {recentFiles.map((file) => (
               <div key={file.file_id} className="file-item">
@@ -84,11 +89,17 @@ function Dashboard({ files, onViewFile }) {
                   </div>
                 </div>
                 <div className="file-actions">
-                  <button 
+                  <button
                     className="btn btn-primary"
                     onClick={() => onViewFile(file.file_id)}
                   >
                     View
+                  </button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => onDeleteFile(file.file_id)}
+                  >
+                    Delete
                   </button>
                 </div>
               </div>
